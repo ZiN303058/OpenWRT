@@ -265,13 +265,10 @@ jobs:
           cd $WORKING_DIR
           for file in compiled_images/*rootfs.tar.gz; do mv "$file" ${{ env.PACKAGED_OUTPUTPATH }}; done
           cd ${{ env.PACKAGED_OUTPUTPATH }}
-          for file in *rootfs.tar.gz; do mv "$file" fri_$(basename "$file" .tar.gz)$( echo "_$TUNNEL" )$([ "$REVISION_TAG" == "true" ] && echo _rev).tar.gz; done
-          if wget -q https://github.com/frizkyiman/friWrt-MyWrtBuilder/releases/download/amlogic-${{ env.openwrt_board }}-${{ env.BASE }}-${{ env.BRANCH }}-${{ env.DATEMONTH }}/sha256sums; then
-             rm -r *.sha && sha256sum *.gz >> sha256sums
-          else
-             rm -r *.sha && sha256sum *.gz > sha256sums
-          fi
+          for file in *rootfs.tar.gz; do mv "$file" My-WRT_$(basename "$file" .tar.gz)$( echo "_$TUNNEL" ).tar.gz; done
+          rm -r *.sha && sha256sum *.gz > sha256sums
           ls -l
+          echo "RELEASE_TAG=OpenWrt-Amlogic-${{ env.DATE }}-${{ env.TARGET_NAME }}" >> $GITHUB_ENV
           echo "status=success" >> $GITHUB_OUTPUT
 
       - name: Upload Firmware to Release
