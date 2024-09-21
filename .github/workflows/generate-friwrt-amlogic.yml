@@ -21,12 +21,8 @@ on:
         default: "openwrt:23.05.3"
         type: choice
         options:
-          - openwrt:21.02.7
-          - openwrt:23.05.2
-          - openwrt:23.05.3
-          - immortalwrt:21.02.7
-          - immortalwrt:23.05.1
-          - immortalwrt:23.05.2
+          - openwrt:23.05.4
+          - immortalwrt:23.05.3
       target:
         description: "Select device board"
         required: false
