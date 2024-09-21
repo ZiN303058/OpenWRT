@@ -10,7 +10,7 @@
 #
 #=====================================================================================
 
-name: Generate friWrt Amlogic Firmware
+name: Generate Amlogic Firmware
 
 on:
   workflow_dispatch:
@@ -18,7 +18,7 @@ on:
       release_branch:
         description: "Select the release branch:"
         required: true
-        default: "immortalwrt:23.05.2"
+        default: "openwrt:23.05.3"
         type: choice
         options:
           - openwrt:21.02.7
@@ -27,7 +27,6 @@ on:
           - immortalwrt:21.02.7
           - immortalwrt:23.05.1
           - immortalwrt:23.05.2
-          - immortalwrt:23.05.3
       target:
         description: "Select device board"
         required: false
@@ -48,7 +47,7 @@ on:
           - 5.15.1_6.1.1
           - 5.4.1
           - 5.10.1
-          - 5.15.152
+          - 5.15.1
           - 6.1.1
       auto_kernel:
         description: "Auto use the latest kernel"
