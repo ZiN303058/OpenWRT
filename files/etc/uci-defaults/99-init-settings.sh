@@ -8,7 +8,7 @@ echo "###############################################"
 echo "Processor: $(ubus call system board | grep '\"system\"' | sed 's/ \+/ /g' | awk -F'\"' '{print $4}')"
 echo "Device Model: $(ubus call system board | grep '\"model\"' | sed 's/ \+/ /g' | awk -F'\"' '{print $4}')"
 echo "Device Board: $(ubus call system board | grep '\"board_name\"' | sed 's/ \+/ /g' | awk -F'\"' '{print $4}')"
-sed -i "s#_('Firmware Version'),(L.isObject(boardinfo.release)?boardinfo.release.description+' / ':'')+(luciversion||''),#_('Firmware Version'),(L.isObject(boardinfo.release)?boardinfo.release.description+' build by friWrt [Ouc3kNF6]':''),#g" /www/luci-static/resources/view/status/include/10_system.js
+sed -i "s#_('Firmware Version'),(L.isObject(boardinfo.release)?boardinfo.release.description+' / ':'')+(luciversion||''),#_('Firmware Version'),(L.isObject(boardinfo.release)?boardinfo.release.description+' build by Sim-Cave [Ouc3kNF6]':''),#g" /www/luci-static/resources/view/status/include/10_system.js
 if grep -q "ImmortalWrt" /etc/openwrt_release; then
   sed -i "s/\(DISTRIB_DESCRIPTION='ImmortalWrt [0-9]*\.[0-9]*\.[0-9]*\).*'/\1'/g" /etc/openwrt_release
   echo Branch version: "$(grep 'DISTRIB_DESCRIPTION=' /etc/openwrt_release | awk -F"'" '{print $2}')"
@@ -20,11 +20,11 @@ echo "Tunnel Installed: $(opkg list-installed | grep -e luci-app-openclash -e lu
 echo "###############################################"
 
 # Set login root password
-(echo "friwrt"; sleep 1; echo "friwrt") | passwd > /dev/null
+(echo "openwrt"; sleep 1; echo "openwrt") | passwd > /dev/null
 
 # Set hostname and Timezone to Asia/Jakarta
 echo "Setup NTP Server and Time Zone to Asia/Jakarta"
-uci set system.@system[0].hostname='friWrt'
+uci set system.@system[0].hostname='OpenWrt'
 uci set system.@system[0].timezone='WIB-7'
 uci set system.@system[0].zonename='Asia/Jakarta'
 uci -q delete system.ntp.server
@@ -61,15 +61,15 @@ echo "Setup Wireless if available"
 uci set wireless.@wifi-device[0].disabled='0'
 uci set wireless.@wifi-iface[0].disabled='0'
 uci set wireless.@wifi-iface[0].encryption='psk2'
-uci set wireless.@wifi-iface[0].key='friwrt2024'
+uci set wireless.@wifi-iface[0].key='openwrt'
 uci set wireless.@wifi-device[0].country='ID'
 if grep -q "Raspberry Pi 4\|Raspberry Pi 3" /proc/cpuinfo; then
-  uci set wireless.@wifi-iface[0].ssid='friWrt_5g'
+  uci set wireless.@wifi-iface[0].ssid='openwrt'
   uci set wireless.@wifi-device[0].channel='149'
   uci set wireless.radio0.htmode='HT40'
   uci set wireless.radio0.band='5g'
 else
-  uci set wireless.@wifi-iface[0].ssid='friWrt_2g'
+  uci set wireless.@wifi-iface[0].ssid='OpenWrt'
   uci set wireless.@wifi-device[0].channel='1'
   uci set wireless.@wifi-device[0].band='2g'
 fi
