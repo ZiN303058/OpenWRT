@@ -10,7 +10,7 @@
 #
 #=====================================================================================
 
-name: Generate Amlogic Firmware
+name: Generate friWrt Amlogic Firmware
 
 on:
   workflow_dispatch:
@@ -18,11 +18,15 @@ on:
       release_branch:
         description: "Select the release branch:"
         required: true
-        default: "openwrt:23.05.4"
+        default: "openwrt:23.05.5"
         type: choice
         options:
-          - openwrt:23.05.4
-          - immortalwrt:23.05.3
+          - openwrt:21.02.7
+          - openwrt:23.05.2
+          - openwrt:23.05.5
+          - immortalwrt:21.02.7
+          - immortalwrt:23.05.1
+          - immortalwrt:23.05.2
       target:
         description: "Select device board"
         required: false
@@ -318,7 +322,7 @@ jobs:
           auto_kernel: ${{ inputs.auto_kernel }}
           kernel_repo: ${{ inputs.kernel_repo }}
           kernel_usage: ${{ inputs.kernel_usage }}
-          builder_name: Sim-Cave
+          builder_name: friWrt
 
       - name: Prepare file before upload
         if: ${{ env.PACKAGED_STATUS }} == 'success' && !cancelled()
