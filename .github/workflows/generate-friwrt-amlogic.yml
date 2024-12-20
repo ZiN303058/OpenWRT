@@ -22,7 +22,7 @@ on:
         type: choice
         options:
           - openwrt:23.05.4
-          - immortalwrt:23.05.4
+          - immortalWrt 24.10.0-rc1
       target:
         description: "Select device board"
         required: false
