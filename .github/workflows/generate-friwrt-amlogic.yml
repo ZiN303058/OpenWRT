@@ -22,7 +22,7 @@ on:
         type: choice
         options:
           - openwrt:23.05.4
-          - immortalWrt 24.10.0-rc1
+          - immortalWrt 23.05.0
       target:
         description: "Select device board"
         required: false
@@ -218,9 +218,9 @@ jobs:
       - name: Download Image Builder
         id: download
         run: |
-          RELEASE="$DOWNLOAD_BASE/releases/$BRANCH/targets/$TARGET_SYSTEM/$BASE-imagebuilder-$BRANCH-$TARGET_NAME.Linux-x86_64.tar.zst"
+          RELEASE="$DOWNLOAD_BASE/releases/$BRANCH/targets/$TARGET_SYSTEM/$BASE-imagebuilder-$BRANCH-$TARGET_NAME.Linux-x86_64.tar.xz"
           wget -nv "$RELEASE"
-          tar -xJf *-imagebuilder-* && sync && rm -f *-imagebuilder-*.tar.zst && mv *-imagebuilder-* $WORKING_DIR && sync
+          tar -xJf *-imagebuilder-* && sync && rm -f *-imagebuilder-*.tar.xz && mv *-imagebuilder-* $WORKING_DIR && sync
           cp -r $GITHUB_WORKSPACE/origin/* $GITHUB_WORKSPACE/$WORKING_DIR
           if [ "$TARGET" == "all" ]; then
              mkdir -p /builder/$WORKING_DIR
